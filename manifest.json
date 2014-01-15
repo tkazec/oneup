@@ -1,0 +1,19 @@
+{
+	"name": "OneUp for Coinbase, Bitcoin, Litecoin, and more",
+	"version": "0.1.0",
+	"manifest_version": 2,
+	"description": "Quickly and easily tip cryptocurrency addresses right from the page using Coinbase or installed clients!",
+	"icons": {
+		"16": "images/icons/16-1x.png",
+		"48": "images/icons/48-1x.png",
+		"128": "images/icons/128-1x.png"
+	},
+	"background": {
+		"scripts": ["scripts/background.js"],
+		"persistent": false
+	},
+	"minimum_chrome_version": "30",
+	"offline_enabled": true,
+	"options_page": "options.html",
+	"permissions": ["contextMenus"]
+}
