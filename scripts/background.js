@@ -4,9 +4,7 @@
 var Version = "0.1.0";
 
 if (!localStorage.version) {
-	chrome.tabs.create({
-		url: 'options.html'
-	});
+	window.open("options.html");
 }
 
 localStorage.version = Version;
@@ -18,15 +16,40 @@ localStorage.version = Version;
 chrome.runtime.onInstalled.addListener(function () {
 	chrome.contextMenus.create({
 		id: "global",
-		title: "OneUp [Coinbase]",
+		title: "OneUp",
 		contexts: ["selection", "link"]
 	});
 });
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// Monitor
+// Catch
 ///////////////////////////////////////////////////////////////////////////////
-chrome.contextMenus.onClicked.addListener(function (info) {
+chrome.contextMenus.onClicked.addListener(function (evt) {
+	if (evt.linkUrl) {
+		var test = evt.linkUrl.match(/^(?:bitcoin|litecoin):(.+)/i);
+		
+		if (test) {
+			Address(test[1]);
+			return;
+		}
+	}
 	
+	Address(evt.selectionText);
 });
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Handle
+///////////////////////////////////////////////////////////////////////////////
+var Address = function (key) {
+	if (key[0] === "1" || key[0] === "3") {
+		if (localStorage.coinbase === "true") {
+			
+		} else {
+			window.open("bitcoin:" + key);
+		}
+	} else if (key[0] === "L") {
+		window.open("litecoin:" + key);
+	}
+};
