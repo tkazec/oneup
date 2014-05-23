@@ -45,7 +45,7 @@ chrome.contextMenus.onClicked.addListener(function (evt) {
 var Address = function (key) {
 	if (key[0] === "1" || key[0] === "3") {
 		if (localStorage.coinbase === "true") {
-			
+			window.open("https://coinbase.com/handler?u=bitcoin%3A" + key);
 		} else {
 			window.open("bitcoin:" + key);
 		}
